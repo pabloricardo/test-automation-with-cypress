@@ -64,9 +64,18 @@ describe('Cypress basics', ()=> {
         cy.get('#formComidaVegetariana').should('be.checked')        
     })
 
-    it.only('Combo', ()=>{
+    it('Combo', ()=>{
         cy.get('#formEscolaridade')
             .select('2graucomp')
             .should('have.value', '2graucomp')
+
+        //TODO Validar as opçóes do combo
     })
+
+    it.only('Combo multiplo', ()=>{
+        cy.get('[data-testid=dataEsportes]')
+            .select(['natacao','Corrida'])
+    
+        //TODO Validar as opçóes selecionadas do combo multiplo
+     })
 })
