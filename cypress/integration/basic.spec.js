@@ -49,7 +49,7 @@ describe('Cypress basics', ()=> {
         cy.get('[name="formSexo"]').should('have.length', 2)
     })
 
-    it.only('Checkbox', () =>{
+    it('Checkbox', () =>{
 
         cy.get('#formComidaPizza')
             .click()
@@ -61,8 +61,12 @@ describe('Cypress basics', ()=> {
 
         cy.get('#formComidaPizza').should('not.be.checked')
 
-        cy.get('#formComidaVegetariana').should('be.checked')
-        
-        
+        cy.get('#formComidaVegetariana').should('be.checked')        
+    })
+
+    it.only('Combo', ()=>{
+        cy.get('#formEscolaridade')
+            .select('2graucomp')
+            .should('have.value', '2graucomp')
     })
 })
