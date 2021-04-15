@@ -9,13 +9,29 @@ describe('Cypress basics', ()=> {
         cy.reload()
     })
 
-    it('Should visit a page and assert title', () => {
-        //cy.pause()
+    it.only('Should visit a page and assert title', () => {
 
         //cy.title().debug()
-        cy.title().debug()
+        cy.title()
             .should('be.equal', 'Campo de Treinamento')
             .and('contain', 'Campo')
+        //cy.pause()
+
+        let syncTitle
+
+        cy.title().then(title =>{
+            console.log(title)
+            cy.get('#formNome').type(title)
+            syncTitle = title
+        })
+
+        cy.get('[data-cy=dataSobrenome]').then($el =>{
+            $el.val(syncTitle)
+        })
+
+        cy.get('#elementosForm\\:sugestoes').then($el=>{
+            cy.wrap($el).type(syncTitle)
+        })
     })
 
 
@@ -72,7 +88,7 @@ describe('Cypress basics', ()=> {
         //TODO Validar as opçóes do combo
     })
 
-    it.only('Combo multiplo', ()=>{
+    it('Combo multiplo', ()=>{
         cy.get('[data-testid=dataEsportes]')
             .select(['natacao','Corrida'])
     
